@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoutes.js');
-const productRouter = require('./routes/productRoutes'); 
-
+const productRouter = require('./routes/productRoutes');
+const bannerRouter = require('./routes/bannerRoutes');
+const AppError = require('./utils/AppError');
 dotenv.config({ path: './config.env' });
 
 /**
@@ -39,7 +40,6 @@ app.use(express.json());
  */
 app.use('/api/users', userRouter);
 
-
 /**
  * @PRODUCTS_Routes
  *  POST    /api/products
@@ -48,8 +48,17 @@ app.use('/api/users', userRouter);
  *  PATCH   /api/products/:id
  *  DELETE  /api/products/:id
  */
-app.use('/api/products',productRouter); 
+app.use('/api/products', productRouter);
 
+/**
+ * @BANNER_Routes
+ *  POST    /api/banner
+ *  GET     /api/banner
+ *  GET     /api/banner/:id
+ *  PATCH   /api/banner/:id
+ *  DELETE  /api/banner/:id
+ */
+app.use('/api/banners', bannerRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
