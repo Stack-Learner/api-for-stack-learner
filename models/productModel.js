@@ -31,13 +31,18 @@ const productSchema = mongoose.Schema(
       default: 0,
     },
     category: {
-      type: String,
+      type: mongoose.Schema.ObjectId,
+      ref: 'Category',
+      required: true,
     },
     subcategory: {
       type: String,
     },
     brand: {
       type: String,
+    },
+    haveDiscount: {
+      type: Boolean,
     },
     discount: {
       type: Number,
@@ -47,21 +52,39 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    shippingdetails: {
+    // shippingdetails: {
+    //   type: String,
+    // },
+    manufacture: {
       type: String,
     },
-    manufacturesdetails: {
-      type: String,
+    numReviews: {
+      type: Number,
+      default: 0,
     },
-    selectedsize: {
-      type: Array,
-      default: [],
+    avgRating: {
+      type: Number,
+      default: 0,
+      min: 1, 
+      max: 5, 
+      set: (val) => Math.round(val*10)/10
     },
-    feature: Boolean,
+    // selectedsize: {
+    //   type: Array,
+    //   default: [],
+    // },
+    featured: Boolean,
     trend: Boolean,
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+//this finds out how many reviews are there in a certain tour .
+productSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'product',
+  localField: '_id',
+});
 
 productSchema.index(
   {

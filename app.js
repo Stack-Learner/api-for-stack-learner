@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes');
 const bannerRouter = require('./routes/bannerRoutes');
+const categoryRouter = require('./routes/categoryRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/AppError');
 dotenv.config({ path: './config.env' });
 
@@ -59,6 +61,26 @@ app.use('/api/products', productRouter);
  *  DELETE  /api/banner/:id
  */
 app.use('/api/banners', bannerRouter);
+
+/**
+ * @category_Routes
+ *  POST    /api/category
+ *  GET     /api/category
+ *  GET     /api/category/:id
+ *  PATCH   /api/category/:id
+ *  DELETE  /api/category/:id
+ */
+app.use('/api/category', categoryRouter);
+
+/**
+ * @review_Routes
+ *  POST    /api/review
+ *  GET     /api/review
+ *  GET     /api/review/:id
+ *  PATCH   /api/review/:id
+ *  DELETE  /api/review/:id
+ */
+app.use('/api/review', reviewRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));

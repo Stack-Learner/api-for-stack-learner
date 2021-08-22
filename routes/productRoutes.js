@@ -1,8 +1,11 @@
 const express = require('express'); 
 const authController = require('../controllers/authController'); 
 const productController = require('../controllers/productController')
+const reviewRouter = require('./reviewRoutes'); 
+
 const router = express.Router(); 
 
+router.use('/:productId/review',reviewRouter); 
 
 /**
  * @PRODUCTS_Routes
@@ -19,8 +22,7 @@ const router = express.Router();
  */
 router.route('/').get(productController.getAllProducts);
 router.route('/:id').get(productController.getProduct)
-
-
+router.get('/category/:name', productController.getProductByCategory); 
 /**
  * @ADMIN_ROUTES
  */
