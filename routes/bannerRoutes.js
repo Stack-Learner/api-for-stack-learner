@@ -1,6 +1,7 @@
 const express = require('express'); 
 const bannerController = require('../controllers/bannerController'); 
 const authController = require('../controllers/authController'); 
+const uploadS3 = require('../uploadS3'); 
 const router = express.Router(); 
 
 /**
@@ -24,7 +25,12 @@ router.route('/:id').get(bannerController.getBanner)
  * @ADMIN_ROUTES
  */
 router.use(authController.protect,authController.restrictTo('admin','user')); 
-router.post('/',bannerController.createBanner); 
+router.post(
+  '/',
+  uploadS3.single('banner-image'),
+  bannerController.setBannerImage,
+  bannerController.createBanner
+); 
 router.route('/:id').patch(bannerController.updateBanner).delete(bannerController.deleteBanner); 
 
 module.exports = router; 

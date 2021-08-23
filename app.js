@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoutes.js');
+const profileRouter = require('./routes/profileRoutes'); 
 const productRouter = require('./routes/productRoutes');
 const bannerRouter = require('./routes/bannerRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
@@ -41,6 +42,16 @@ app.use(express.json());
  *  DELETE  /api/users/:id
  */
 app.use('/api/users', userRouter);
+
+/**
+ * @USERS_Profile_Routes
+ *  POST    /api/profile
+ *  GET     /api/profile
+ *  GET     /api/profile/:id
+ *  PATCH   /api/profile/:id
+ *  DELETE  /api/profile/:id
+ */
+app.use('/api/profile',profileRouter); 
 
 /**
  * @PRODUCTS_Routes

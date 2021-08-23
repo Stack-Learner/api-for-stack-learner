@@ -24,25 +24,16 @@ const userSchema = mongoose.Schema({
     required: 'Minimum 6 character is required for password', 
     minLength: 6,
   },
-  // passwordConfirm: { 
-  //   type: String, 
-  //   required: 'Please confirm your password', 
-  //   validate: { 
-  //     validator: function(confirmPasswordData) {
-  //       return confirmPasswordData === this.password
-  //     }, 
-  //     message: 'Passwords are not the same.'
-  //   }
-  // }, 
   email: { 
     type: String, 
     required: 'Please Enter an email', 
     unique: true, 
     validate: [validator.isEmail, 'Please Enter a valid email']
   }, 
-  // photo: { 
-  //   type: String, 
-  // }, 
+  photo: { 
+    type: String, 
+    default: ''
+  }, 
 
 },{
   timestamps: true, //insert createdAt and updatedAt field automatically

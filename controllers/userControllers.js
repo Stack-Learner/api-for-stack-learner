@@ -2,12 +2,24 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const Factory = require('./handlerFactory');
+
+
+exports.uploadProfilePicture = catchAsync(async (req,res,next) => { 
+  const userPhoto = await User.findByIdAndUpdate(req.user._id, {
+    photo: req.file.location,
+  }, { 
+    new: true, 
+    runValidators: true
+  }).select('photo');
+  res.status(201).json(userPhoto); 
+});
+
+
 exports.createUser = Factory.createOne(User);
 exports.getAllUser = Factory.getAll(User);
 exports.getSingleUser = Factory.getOne(User);
 exports.updateUser = Factory.updateOne(User);
 exports.deleteUser = Factory.deleteOne(User);
-
 exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password) {
     return next(new AppError('This route is not for password update'));

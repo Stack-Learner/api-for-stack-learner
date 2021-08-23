@@ -4,7 +4,7 @@ const bannerSchema = mongoose.Schema({
   name: {
     type: String
   }, 
-  src: {
+  image: {
     type: String, 
   },
   alt: {

@@ -3,6 +3,10 @@ const AppError = require('../utils/AppError');
 const Banner = require('../models/BannerModel');
 const Factory = require('./handlerFactory');
 
+exports.setBannerImage = (req,res,next) => { 
+  req.body.image = req.file.location 
+  next(); 
+}
 
 //create
 exports.createBanner = Factory.createOne(Banner);

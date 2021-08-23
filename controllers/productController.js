@@ -4,6 +4,12 @@ const Product = require('../models/productModel');
 const Factory = require('./handlerFactory');
 const Category = require('../models/categoryModel');
 //create
+
+exports.setProductImages = (req,res,next) => { 
+  const productImages = req.files.map(f=> f.location); 
+  req.body.Images = productImages; 
+  next(); 
+}
 exports.createProduct = Factory.createOne(Product);
 
 exports.getProductByCategory = catchAsync(async (req, res, next) => {
