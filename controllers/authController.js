@@ -39,8 +39,8 @@ exports.signIn = catchAsync(async (req, res, next) => {
   if (!email || !password) {
     return next(new AppError('Please provide email and password!'));
   }
-  const user = await User.findOne({ email }).select('+password');
-  if (!user || !user.checkPassword(password, user.password)) {
+  const user = await User.findOne({ email }); 
+  if (!user || !user.checkPassword(password)) {
     return next(new AppError('Email or password does not match', 401));
   }
   createSendToken(user, 200, res);

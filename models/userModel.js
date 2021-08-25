@@ -39,13 +39,13 @@ const userSchema = mongoose.Schema({
   timestamps: true, //insert createdAt and updatedAt field automatically
 }); 
 userSchema.pre('save',async function (next) { 
-  if(!this.isModified('password')) return next(); 
+  if(!this.isModified('password') && !this.isNew) return next(); 
 
   this.password = await bcrypt.hash(this.password,10); 
   next(); 
 } ); 
-userSchema.methods.checkPassword = async function(candidatePassword,userPassword)   { 
-  return bcrypt.compare(candidatePassword,userPassword); 
+userSchema.methods.checkPassword = async function(candidatePassword)   { 
+  return bcrypt.compare(candidatePassword,this.password); 
 }
 const User = mongoose.model('User',userSchema); 
 module.exports = User; 
