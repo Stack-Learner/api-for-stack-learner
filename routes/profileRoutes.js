@@ -11,7 +11,7 @@ router.use(authController.protect);
 router
   .route('/')
   .post(profileController.setUserId, profileController.createProfile)
-  .get(profileController.setUserId, profileController.getUserProfile)
+  .get(profileController.setUserId, profileController.getUserProfile)//have only ability to get current user 
   .patch(profileController.setUserId,profileController.updateUserProfile)
   .delete(profileController.setUserId,profileController.deleteUserProfile);
 /**

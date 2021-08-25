@@ -45,12 +45,13 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model,populateOptions) =>
   catchAsync(async (req, res, next) => {
-    
     const doc = await Model.findById(req.params.id).populate(populateOptions);//eita get single product and get single category get single user diye test korte hobe .. finally review diye test korte hobe . 
 
-    doc.password = undefined;
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
+    }
+    if(doc.password) { 
+      doc.password = undefined; 
     }
     res.status(200).json({
       status: 'success',
