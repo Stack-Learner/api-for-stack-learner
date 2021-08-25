@@ -17,6 +17,6 @@ router
 /**
  * @ADMIN_ROUTES
  */
-router.use(authController.restrictTo('admin', 'user'));
+router.use(authController.restrictTo('admin'));
 router.get('/getAllUsersProfile',profileController.getAllProfile);
 module.exports = router;

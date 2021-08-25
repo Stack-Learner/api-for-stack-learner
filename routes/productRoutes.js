@@ -28,13 +28,14 @@ router.get('/category/:name', productController.getProductByCategory);
 /**
  * @ADMIN_ROUTES
  */
-router.use(authController.protect,authController.restrictTo('admin','user'));
+router.use(authController.protect,authController.restrictTo('admin'));
 
 //when an admin is creating a product it's mendatory to upload an image . 
 router.post(
   '/',
-  uploadS3.array('product-images'), 
-  productController.setProductImages, 
+  uploadS3.array('product-images',process.env.MAX_PRODUCT_IMAGE), 
+  productController.setProductImages,
+  productController.categoryAndAdminIdSetter, 
   productController.createProduct
 ); 
 router.route('/:id').patch(productController.updateProduct).delete(productController.deleteProduct); 

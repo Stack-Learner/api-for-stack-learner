@@ -34,11 +34,10 @@ router.post(
  * ADMIN ROUTES
  */
 
-router.use(authController.restrictTo('admin', 'user'));
-router.route('/getAllUser').get(userController.getAllUser);
+router.use(authController.restrictTo('admin'));
+router.route('/admin/getAlluser').get( userController.getAllUser);
 router
   .route('/')
-  // .get(userController.getAllUser)
   .post(userController.createUser);
 router
   .route('/:id')

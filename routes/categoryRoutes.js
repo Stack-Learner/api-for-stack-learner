@@ -10,7 +10,7 @@ const router = express.Router();
 /**
  * @ADMIN ROUTES
  */
-router.use(authController.protect, authController.restrictTo('admin', 'user'));
+router.use(authController.protect, authController.restrictTo('admin'));
 router
   .route('/')
   .get(categoryController.getAllCategory)

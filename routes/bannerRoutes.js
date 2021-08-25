@@ -24,7 +24,7 @@ router.route('/:id').get(bannerController.getBanner)
 /**
  * @ADMIN_ROUTES
  */
-router.use(authController.protect,authController.restrictTo('admin','user')); 
+router.use(authController.protect,authController.restrictTo('admin')); 
 router.post(
   '/',
   uploadS3.single('banner-image'),

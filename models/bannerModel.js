@@ -2,16 +2,18 @@ const mongoose = require('mongoose');
 
 const bannerSchema = mongoose.Schema({
   name: {
-    type: String
+    type: String,
+    
   }, 
   image: {
     type: String, 
+    required: true,
   },
   alt: {
     type: String, 
   }
 },{
-  Timestamps: true, 
+  timestamps: true, 
 }); 
 const Banner = mongoose.model('Banner',bannerSchema); 
 module.exports = Banner; 

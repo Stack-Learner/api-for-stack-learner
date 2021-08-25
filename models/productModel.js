@@ -3,6 +3,15 @@ const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.ObjectId, 
+      required: true, 
+    },
+    category: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Category',
+      required: true,
+    },
     Images: {
       type: Array,
       default: [],
@@ -26,14 +35,9 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    weaight: {
+    weight: {
       type: Number,
       default: 0,
-    },
-    category: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Category',
-      required: true,
     },
     subcategory: {
       type: String,
@@ -65,7 +69,7 @@ const productSchema = mongoose.Schema(
     avgRating: {
       type: Number,
       default: 0,
-      min: 1, 
+      min: 0, 
       max: 5, 
       set: (val) => Math.round(val*10)/10
     },

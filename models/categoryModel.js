@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const categorySchema = mongoose.Schema({
   name: { 
     type: String, 
-    required: true
+    required: true,
+    unique: [true,'Already a category exist with this name .']
   }
 }); 
 

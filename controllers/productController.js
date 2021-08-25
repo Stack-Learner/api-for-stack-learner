@@ -10,11 +10,20 @@ exports.setProductImages = (req,res,next) => {
   req.body.Images = productImages; 
   next(); 
 }
+exports.categoryAndAdminIdSetter = catchAsync(async (req,res,next) => { 
+  
+  const category = await Category.findOne({name: req.body.category}); 
+  req.body.category = category._id; //setting category id 
+  req.body.user = req.user._id; //setting admin id 
+  next();
+})
+
 exports.createProduct = Factory.createOne(Product);
 
 exports.getProductByCategory = catchAsync(async (req, res, next) => {
-  const category_id = await Category.find({name: req.params.name}); 
-  const products = await Product.find({category: category_id}).populate('category','name -_id'); 
+  
+  const category = await Category.findOne({ name: req.params.name }); 
+  const products = await Product.find({category: category._id}).populate('category','name -_id'); 
   res.status(200).json({
     status: 'success', 
     results: products.length, 
@@ -25,7 +34,13 @@ exports.getProductByCategory = catchAsync(async (req, res, next) => {
 exports.getAllProducts = Factory.getAll(Product);
 
 //get one
-exports.getProduct = Factory.getOne(Product,{path:'reviews'});
+exports.getProduct = catchAsync(async (req,res,next) => { 
+  const product = await Product.findById(req.params.id).populate('reviews').populate('category','name -_id');
+  res.json({
+    status:'success', 
+    product
+  }); 
+})
 
 //update
 exports.updateProduct = Factory.updateOne(Product);
