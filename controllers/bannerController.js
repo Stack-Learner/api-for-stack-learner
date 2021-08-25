@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
-const Banner = require('../models/BannerModel');
+const Banner = require('../models/bannerModel');
 const Factory = require('./handlerFactory');
 
 exports.setBannerImage = (req,res,next) => { 
