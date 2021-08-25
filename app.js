@@ -32,7 +32,9 @@ mongoose
 const app = express();
 //req.body parser
 app.use(express.json());
-
+app.get('/',(req,res,next)=> { 
+  res.send("Perfectly serving the api"); 
+})
 /**
  * @USER_Routes
  *  POST    /api/users
