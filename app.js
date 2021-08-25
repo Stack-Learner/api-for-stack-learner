@@ -8,7 +8,7 @@ const bannerRouter = require('./routes/bannerRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/AppError');
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: `${__dirname}/config.env` });
 
 /**
  * @DESC  Database Connection
