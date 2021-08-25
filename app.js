@@ -19,7 +19,7 @@ const DB = process.env.DATABASE.replace(
 );
 mongoose
   .connect(
-    'mongodb+srv://akash:nfQnJW4PgqDuiw2C@akash.1ehlv.mongodb.net/AKASH?retryWrites=true&w=majority',
+    'mongodb+srv://akash:akash@akash.1ehlv.mongodb.net/AKASH?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
