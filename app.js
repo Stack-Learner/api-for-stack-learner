@@ -8,7 +8,7 @@ const bannerRouter = require('./routes/bannerRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/AppError');
-dotenv.config({ path: `${__dirname}/config.env` });
+dotenv.config();
 
 /**
  * @DESC  Database Connection
@@ -18,12 +18,15 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-    useCreateIndex: true,
-  })
+  .connect(
+    'mongodb+srv://akash:nfQnJW4PgqDuiw2C@akash.x8xzm.mongodb.net/AKASH?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: true,
+      useCreateIndex: true,
+    }
+  )
   .then(() => console.log('DB connection successful!'))
   .catch((err) => {
     console.log('Error : ', err);
